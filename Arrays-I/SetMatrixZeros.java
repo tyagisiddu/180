@@ -8,10 +8,8 @@ public void setZeroes(int[][] matrix) {
         for (int c = 0 ; c < col ; c++) {
             if (matrix[r][c] == 0) {
                 matrix[r][0] = 0;
-                if (c == 0) {
-                    col0 = 0;
-                    else matrix[0][c] = 0;
-                }
+                if (c == 0) col0 = 0;
+                else matrix[0][c] = 0;
             }
         }
     }
