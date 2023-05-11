@@ -1,0 +1,12 @@
+BRUTE:
+Find all possible permutations. Sort them in lexicographically increasing order. 
+Find the given permutation in the order and return the next permutation.
+
+OPTIMAL:
+If the array is sorted in decreasing order then we just reverse the array and return it.
+Else there would be an index where arr[i] < arr[i + 1].
+So we start from the second last element and move left to find the index where arr[i] < arr[i + 1].
+This index is called the break point.
+If there is no break point, this means the array is reverse sorted. So we reverse it and return.
+Now we start from the last element and moving left, we find the first element just greater than element at break point.
+We swap both of these and reverse the part of the array from next to break point to last element.
