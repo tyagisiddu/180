@@ -1,7 +1,32 @@
 BRUTE:
+Traverse the entire matrix and for all the cells that are zero, mark all of the non-zero elements of its row and column as -1.
+In the second round, mark all the cells with -1 in them as 0.
+The reason to mark -1 and not 0 directly is to not create new zeros. Also to mark only non-zero elements of row and column as 
+-1 is to not lose pre-existing zeros if any.
 
+O((r * c) * (r + c)) : O(1)
 
 BETTER:
+We can use two arrays row of size r and col of size c to store the location of 0 cells. 
+Traverse the entire matrix and for each cell(i, j) which is 0, mark row[i] and col[j] as 1.
+This means that all the cells of ith row and jth col will be 0.
+Now traverse the entire matrix again, if row[i] or col[j] is 1, mark that element 0.
 
+O(r * c) : O(r + c)
 
 OPTIMAL:
+Instead of keeping two separate arrays for tracking row and columns,
+we treat the first column of the matrix as row array where if cell(i, 0) is 0 implies ith row is zero.
+Also we treat the first row except matrix[0][0] as col array where if cell(0, j) is 0 implies jth col is zero.
+But what if j becomes 0. For that we keep an independent variable col0 initialized to 1.
+
+Traverse the matrix and if cell(i, j) is 0, mark matrix[i][0] as 0. Further if j is 0, mark col0 as 0 else mark 
+matrix[0][j] as 0.
+
+Now traverse the submatrix skipping first row and column. Mark the cell(i, j) 0 if either of matrix[i][0] or matrix[0][j] is 0.
+We do not modify the first row and col until now as they define the value of other cells.
+
+Now mark the first row zero if matrix[0][0] is 0. This is done before marking first column zero because then matrix[0][0] will
+be modified and col0 is independent. Now mark firt column zero if col0 is 0.
+
+O(r * c) : O(1)
